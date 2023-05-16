@@ -13,7 +13,7 @@ node {
    }
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
-       def app = docker.build("cbalcazarp/repo-devops-challenge:latest", '$WORKSPACE/.').push()
+       def app = docker.build("cbalcazarp/repo-devops-challenge:latest", '.').push()
      }
    }
 //}
