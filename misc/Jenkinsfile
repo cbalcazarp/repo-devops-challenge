@@ -24,7 +24,7 @@ stage('Build image') {
     }
     
  stage('Push image') {
-        withDockerRegistry([ credentialsId: "dockerhub", url: "https://index.docker.io/v2/" ]) {
+        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
         dockerImage.push()
         }
     }
