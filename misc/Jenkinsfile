@@ -11,15 +11,15 @@ node {
        sh 'npm test'
     
    }
-   //stage('docker build/push') {
-   //  docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
-   //    def app = docker.build("cbalcazarp/repo-devops-challenge:${commit_id}", '$WORKSPACE/.').push()
-   //  }
-   //}
+   stage('docker build/push') {
+     docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
+       def app = docker.build("cbalcazarp/repo-devops-challenge:latest", '$WORKSPACE/.').push()
+     }
+   }
 //}
 
 
-stage('Build image') {
+/* stage('Build image') {
        dockerImage = docker.build("cbalcazarp/repo-devops-challenge:latest")
     }
     
@@ -27,5 +27,5 @@ stage('Build image') {
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
         dockerImage.push()
         }
-    }
+    } */
 }
