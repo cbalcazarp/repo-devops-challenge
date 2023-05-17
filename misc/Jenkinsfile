@@ -1,21 +1,23 @@
 node {
-   def commit_id
-   stage('Preparation') {
-     checkout scm
-     sh "git rev-parse --short HEAD > .git/commit-id"                        
-     commit_id = readFile('.git/commit-id').trim()
-   }
-   stage('Installation & Test') {
-  
-       sh 'npm install --only=dev'
-       sh 'npm test'
-    
-   }
-    stage('Build & Push image') {
-            withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-            sh "docker build -t cbalcazarp/repo-devops-challenge:${commit_id} ."
-            sh "docker push cbalcazarp/repo-devops-challenge:${commit_id}"
-            }
+  def commit_id
+  stage('Preparation') {
+    checkout scm
+    sh "git rev-parse --short HEAD > .git/commit-id"                        
+    commit_id = readFile('.git/commit-id').trim()
+  }
+  stage('Installation & Test') {
+    sh 'npm install --only=dev'
+    sh 'npm test'
+  }
+  stage('Build & Push image') {
+    withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+      sh "docker build -t cbalcazarp/repo-devops-challenge:${commit_id} ."
+      sh "docker push cbalcazarp/repo-devops-challenge:${commit_id}"
     }
-
+  }
+  stage('Deploy to Server') {
+    sshagent([ 'VM-alpha' ]) {
+      sh "ssh -o StrictHostKeyChecking=no ubuntu@54.172.103.101 ls -lh"
+    }
+  }
 }
