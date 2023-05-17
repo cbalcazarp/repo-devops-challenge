@@ -5,13 +5,13 @@ node {
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
    }
-   stage('test') {
+   stage('Installation & Test') {
   
        sh 'npm install --only=dev'
        sh 'npm test'
     
    }
-    stage('Push image') {
+    stage('Build & Push image') {
             withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
             sh "docker build -t cbalcazarp/repo-devops-challenge:${commit_id} ."
             sh "docker push cbalcazarp/repo-devops-challenge:${commit_id}"
