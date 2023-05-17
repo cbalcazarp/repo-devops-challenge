@@ -17,7 +17,8 @@ node {
   }
   stage('Deploy to Server') {
     sshagent([ 'VM-alpha' ]) {
-      sh "ssh -o StrictHostKeyChecking=no ubuntu@54.172.103.101 ls -lh"
+      sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.172.103.101'
+      sh 'ls'
     }
   }
 }
