@@ -13,8 +13,8 @@ node {
    }
     stage('Push image') {
             withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-            sh "docker build -t cbalcazarp/repo-devops-challenge:latest ."
-            sh "docker push cbalcazarp/repo-devops-challenge:latest"
+            sh "docker build -t cbalcazarp/repo-devops-challenge:${commit_id} ."
+            sh "docker push cbalcazarp/repo-devops-challenge:${commit_id}"
             }
     }
 
