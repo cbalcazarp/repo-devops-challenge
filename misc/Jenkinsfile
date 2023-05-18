@@ -14,6 +14,7 @@ node {
       sh "docker build -t cbalcazarp/repo-devops-challenge:${commit_id} ."
       sh "docker push cbalcazarp/repo-devops-challenge:${commit_id}"
     }
+    echo ${commit_id}
   }
   /* stage('Deploy to Server') {
     sshagent([ 'VM-alpha' ]) {
