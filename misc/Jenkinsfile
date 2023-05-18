@@ -15,11 +15,11 @@ node {
       sh "docker push cbalcazarp/repo-devops-challenge:${commit_id}"
     }
   }
-  stage('Deploy to Server') {
+  /* stage('Deploy to Server') {
     sshagent([ 'VM-alpha' ]) {
       sh 'ls -lh /var/lib/jenkins/workspace/My-first-pipeline@tmp/*.key'
       sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.172.103.101'
       sh 'ls'
     }
-  }
+  } */
 }
