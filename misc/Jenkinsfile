@@ -17,7 +17,7 @@ node {
     echo "${commit_id}"
   }
   stage('Deploy to Server') {
-    sh 'ssh -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/id_rsa_beta jenkins@54.167.95.80'
+    sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80'
     sh 'ls'
   }
 }
