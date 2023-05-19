@@ -16,9 +16,18 @@ node {
     }
     echo "${commit_id}"
   }
-  stage('Deploy to Server vmalpha') {
-    sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
-    
-    
+
+  if (env.BRANCH_NAME == 'alpha') {
+
+    stage('Deploy to Server VMAlpha') {
+      sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
+    }  
+  
+  }
+
+  else {
+    stage('Deploy to Server VMBeta') {
+      sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80 docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
+    }  
   }
 }
