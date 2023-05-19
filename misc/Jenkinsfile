@@ -18,6 +18,6 @@ node {
   }
   stage('Deploy to Server') {
     sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@54.167.95.80'
-    sh 'ls'
+    sh 'touch test.txt'
   }
 }
