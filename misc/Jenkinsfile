@@ -17,8 +17,8 @@ node {
     echo "${commit_id}"
   }
   stage('Deploy to Server vmalpha') {
-    sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126"
-    sh "docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
+    sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 ls -lh"
+    //sh "docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
     
   }
 }
