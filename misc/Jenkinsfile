@@ -21,8 +21,8 @@ node {
 
     stage('Deploy to Server VMAlpha') {
       echo "Removing old containers"
-      sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker stop $(docker ps -a -q)"
-      sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker rm $(docker ps -a -q)"
+      sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker stop $(docker ps -a -q)'
+      sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker rm $(docker ps -a -q)'
       echo "Creating container"
       sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_alpha jenkins@3.208.20.126 docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
     }  
@@ -32,8 +32,8 @@ node {
   else {
     stage('Deploy to Server VMBeta') {
       echo "Removing old containers"
-      sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80 docker stop $(docker ps -a -q)"
-      sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80 docker rm $(docker ps -a -q)"
+      sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80 docker stop $(docker ps -a -q)'
+      sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80 docker rm $(docker ps -a -q)'
       echo "Creating container"
       sh "ssh -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa_beta jenkins@54.167.95.80 docker run -d --user root -p 3000:3000 cbalcazarp/repo-devops-challenge:${commit_id}"
     }  
